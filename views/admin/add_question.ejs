@@ -1,0 +1,75 @@
+<%- include("navbar.ejs") %>
+
+    <style>
+        textarea,
+        select {
+            border: 1px solid black !important;
+        }
+    </style>
+
+    <form method="post" action="/admin/save_question">
+        <div class="container-fluid mt-3 bg-white p-3 ">
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h1>Add New Question</h1>
+                </div>
+
+                <div class="col-md-12">
+                    <h5 class="mt-3">Enter Question</h5>
+                    <textarea placeholder="Enter Question" name="question" class="form-control"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <h5 class="mt-3">Option - A</h5>
+                    <textarea placeholder="Enter option - A" name="option_a" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mt-3">Option - B</h5>
+                    <textarea placeholder="Enter option - B" name="option_b" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mt-3">Option - C</h5>
+                    <textarea placeholder="Enter option - C" name="option_c" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <h5 class="mt-3">Option - D</h5>
+                    <textarea placeholder="Enter option - D" name="option_d" class="form-control"></textarea>
+                </div>
+
+                <div class="col-md-12">
+                    <h5 class="mt-3">Description of Answer</h5>
+                    <textarea placeholder="Enter Description" name="ans_desc" class="form-control"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <h5 class="mt-3">Corrects Ans*</h5>
+                    <select name="correct_ans" class="form-control " required>
+                        <option disabled selected value="">Select Answer</option>
+                        <option value="a">A</option>
+                        <option value="b">B</option>
+                        <option value="c">C</option>
+                        <option value="d">D</option>
+                    </select>
+                </div>
+                <div class="col-md-6 dropdown">
+                    <h5 class="mt-3">Select subject*</h5>
+                    <select name="subject_id" class="form-control dropdown-toggle" required>
+                        <option disabled selected value="">Question subject</option>
+                        <% for(i=0;i<subject.length;i++){ %>
+                            <option value="<%=subject[i].subject_id%>">
+                                <%=subject[i].subject_name%>
+                            </option>
+                            <% } %>
+                    </select>
+                </div>
+                <div class="col-md-12 mt-5 mb-3 text-center">
+                    <button class="btn btn-dark ">Save Question</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+
+    <%- include("footer.ejs") %>

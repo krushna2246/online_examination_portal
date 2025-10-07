@@ -1,0 +1,20 @@
+<%- include("navbar.ejs") %>
+
+    <h1 class="text-center mt-3">Select test to joon</h1>
+    <div class="container">
+        <div class="row">
+            <% for(i=0;i<test_list.length;i++) { %>
+                <div class="col-md-3">
+                    <div class="card" style="width:100%">
+                        <img class="card-img-top" src="uploads/<%=test_list[i].test_image%>" alt="Card image">
+                        <div class="card-body text-center">
+                          <h4 class="card-title"><%=test_list[i].test_title%></h4>
+                          <a href="/start_test/<%=test_list[i].test_id%>" class="btn btn-primary">Start test</a>
+                        </div>
+                      </div>
+                </div>
+            <% } %>
+        </div>
+    </div>
+
+<%- include("footer.ejs") %>

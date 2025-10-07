@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Dept</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="bg-dark text-white p-1">
+        <div class="container-fluid" style="font-size: 20px;">
+            <div class="row p-2">
+                <div class="col-1">
+                    <img src="https://www.hollywoodreporter.com/wp-content/uploads/2012/12/img_logo_blue.jpg?w=681&h=383&crop=1" alt="" class="w-100" height="50px">
+                </div>
+                <div class="col-2 mt-2">
+                    <h3>Department Test</h3>
+                </div>
+                <div class="col-8 mt-2 text-right" id="test_time">
+                   <h3> </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <form action="/submit_user_answer" method="post" id="quizForm" >
+        <input type="hidden" name="user_test_question_id" value="<%=questions[0]['user_test_question_id'] %>">
+        <input type="hidden" name="user_test_id" value="<%=questions[0]['user_test_id'] %>">
+        <input type="hidden" name="question_id" value="<%=questions[0]['question_id'] %>">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="p-3 pl-4 pr-4" style="background-color: rgb(203, 211, 217);">
+                        <b> <%=questions[0]['question'] %></b>
+                        <br>
+                        <br>
+                        <label for=""><input type="radio" name="provided_ans" value="a">
+                            <%=questions[0]['option_a'] %>
+                        </label>  
+                        <br>
+                        <label for=""><input type="radio" name="provided_ans" value="b">
+                            <%=questions[0]['option_b'] %>
+                        </label>  
+                        <br>
+                        <label for=""><input type="radio" name="provided_ans" value="c">
+                            <%=questions[0]['option_c'] %>
+                        </label>  
+                        <br>
+                        <label for=""><input type="radio" name="provided_ans" value="d">
+                            <%=questions[0]['option_d'] %>
+                        </label>  
+                        <br>
+                        
+                        <div class="text-right">
+                            <button class="btn btn-primary btn-sm">Next Question</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+        // setInterval(function(){
+            // var start_time=('<%=test_time[0]['test_start_time']%>');
+            var time=(("<%=test_time[0]['test_total_time']%>"/"<%=test_time[0]['test_total_questions']%>")*60);
+            // var total_question="<%=test_time[0]['test_total_questions']%>";
+        //     min=parseInt(time/60);
+        //     sec=parseInt(time%60);
+        //     $("#test_time").html(min+":"+sec);
+        // })
+        // console.log(start_time); 
+        // console.log(time); 
+        
+
+        
+        function countDown(seconds) {
+        let ttl_time = seconds;
+
+            min=parseInt(ttl_time/60);
+            sec=parseInt(ttl_time%60);
+            $("#test_time").html(min+":"+sec);
+            if (ttl_time <= 0) {
+                document.getElementById("quizForm").submit();
+            } else {
+            console.log(formatTime(ttl_time));
+            ttl_time -= 1;
+            }
+        
+
+        const interval = setInterval(() => 
+        {
+            min=parseInt(ttl_time/60);
+            sec=parseInt(ttl_time%60);
+            $("#test_time").html(min+":"+sec);
+            if (ttl_time <= 0) {
+                document.getElementById("quizForm").submit();
+            } else {
+            console.log(formatTime(ttl_time));
+            ttl_time -= 1;
+            }
+        }, 1000);
+        }
+
+        function formatTime(seconds) {
+        const hours = Math.floor(seconds / 3600);
+        const remainingMinutes = Math.floor((seconds % 3600) / 60);
+        const remainingSeconds = seconds % 60;
+
+        const formattedHours = String(hours).padStart(2, "0");
+        const formattedMinutes = String(remainingMinutes).padStart(2, "0");
+        const formattedSeconds = String(remainingSeconds).padStart(2, "0");
+
+        // return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
+        }
+
+        // Example usage with time in seconds:
+        const totalTimeInSeconds = time; // Change this to the desired number of seconds
+        countDown(totalTimeInSeconds);
+
+    </script>
+  
+
+<%- include("footer.ejs") %>

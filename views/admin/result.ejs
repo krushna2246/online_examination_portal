@@ -1,0 +1,55 @@
+<%- include("navbar.ejs") %>
+
+<div class="container-fluid p-5 bg-white" > 
+    <div class="row" id="print_result">
+        <div class="col-md-12 text-center mb-4">
+            <h3>Result</h3>
+        </div>
+
+        
+        
+        <div class="col-md-12 table-responsive">
+            <table class="table table-bordered table-sm">
+                <tr>
+                    <th>SN</th>
+                    <th>Student Name</th>
+                    <th>Subject Name</th>
+                    <th>Total Marks</th>
+                    <th>Obtain Marks</th>
+                </tr>
+                <% for( i=0;i<result.length;i++) { %>
+                    <tr>
+                        
+                        <td><%= i+1 %></td>
+                        <td><%= result[i].user_name%></td>
+                        <td><%= result[i].test_title%></td>
+                        <td><%= result[i].test_total_marks%></td>
+                        <td><%= result[i].obtain_mark%></td>
+                        
+                    </tr>
+                <% } %>
+            </table>
+
+        </div>
+    </div>
+    <button class="btn btn-outline-success" id="print_page">Print</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#print_page").click(function() {
+            // Use Print.js to print the content of #print_result
+            printJS({
+                printable: 'print_result',  // ID, class, or DOM node
+                type: 'html',  // 'html' or 'image' or 'pdf'
+                documentTitle: 'Print Result',  // Optional document title
+                targetStyles: ['*'],  // Apply all styles
+            });
+        });
+    });
+</script>
+
+
+<%- include("footer.ejs") %>

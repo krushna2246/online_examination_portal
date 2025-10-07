@@ -1,0 +1,46 @@
+<%- include("navbar.ejs") %>
+
+
+<style>
+    textarea,
+    select {
+        border: 1px solid black !important;
+    }
+</style>
+
+<form method="post" action="/admin/save_admin" enctype="multipart/form-data">
+    <div class="container-fluid mt-3 bg-white p-3 ">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Add New Admin</h1>
+            </div>
+
+            <div class="col-md-12">
+                <h5 class="mt-3">Enter Name</h5>
+                <input type="text" placeholder="Enter Name" name="name" class="form-control" required>
+            </div>
+            <div class="col-md-12">
+                <h5 class="mt-3">Upload Image</h5>
+                <input type="file"  name="image" class="form-control" required accept="image/*">
+            </div>
+            <div class="col-md-12">
+                <h5 class="mt-3">Enter E-mail</h5>
+                <input type="email" placeholder="Enter email" name="email" class="form-control" required>
+            </div>
+            <div class="col-md-12">
+                <h5 class="mt-3">Enter password</h5>
+                <input type="password" placeholder="Enter password" name="password" class="form-control"    
+                required>
+            </div>
+
+            <div class="col-md-12 mt-5 mb-3 text-center">
+                <button class="btn btn-dark ">Save Admin</button>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+
+<%- include("footer.ejs") %>

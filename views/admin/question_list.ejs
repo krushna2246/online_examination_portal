@@ -1,0 +1,76 @@
+<%- include("navbar.ejs") %>
+
+<style>
+    .my_btn{
+        height: 35px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 50px;
+        font-size: 20px;
+        background-color: white;
+    }
+    .my_active_btn{
+        background-color: black;
+        color: white;
+    }
+    a{
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="container-fluid mt-3 bg-white p-3">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>All Question List</h1>
+        </div>
+        <div class="col-md-12">
+            <a href="/admin/question_list">
+                <button class="mt-2 my_btn <%= (active_tab=='All')? 'my_active_btn':'' %> ">All Subject</button>
+            </a>
+            <% for(i=0;i<subject.length;i++){ %>
+                <a href="/admin/question_list?subject_id=<%=subject[i].subject_id%>">
+                    <button class="mt-2 my_btn <%= (active_tab==subject[i].subject_id)? 'my_active_btn':'' %>"> 
+                        <%=subject[i].subject_name%></button>
+                </a>
+            <% } %>
+        </div>
+
+        <div class="col-md-12 mt-4">
+            <table class=" table table-sm table-bordered">
+                <tr>
+                    <th></th>
+                    <th>SN</th>
+                    <th>Subject</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+                <% for(i=0;i<questions.length;i++){ %>
+                    <tr>
+                        <td class="m-0" style="width: 100px;">
+                            <a href="/admin/question_details/<%=questions[i]['question_tbl_id']%>">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fa fa-info-circle w-100 p-0"></i>
+                                </button>
+                            </a>
+                                <button class="btn btn-danger btn-sm">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                        </td>
+                        <td><%= i+1 %></td>
+                        <td><%= questions[i]['subject_name'] %></td>
+                        <td><%= questions[i]['question'] %></td>
+                        <td>
+                            <span class="text-uppercase">
+                                <%= questions[i]['correct_ans'] %>: <%= questions[i]['option_'+questions[i] 
+                                ['correct_ans']] %>        
+                            </span>
+                        </td>
+                    </tr>
+                <% } %>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<%- include("footer.ejs") %>
